@@ -16,10 +16,12 @@ public class Parsing
         public List<Rule> Rules { get; set; } = new List<Rule>();
         public string SaveAs { get; set; } = string.Empty;
         public bool FixDuplicates { get; set; } = false;
+        public bool HideEndIdentifiers { get; set; } = false;
     }
     public class Rule
     {
         public string RuleAsString { get; set; }
+        public string ValueAfterRuleEnd { get; set; } = string.Empty;
     }
     
     public class RuleArray

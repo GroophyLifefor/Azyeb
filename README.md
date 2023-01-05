@@ -11,7 +11,7 @@ This project is really valuable to me and I will continue to develop it.
 	  "Text": "char is {chars}\r\n",
 	  "Rules": [
 		{
-		  "RuleAsString": "k[â-ê,chars]"
+		  "RuleAsString": "c[â-ê,chars]"
 		}
 	  ],
 	  "SaveAs": "",

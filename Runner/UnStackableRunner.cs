@@ -3,12 +3,13 @@ using Azyeb.Handle;
 
 namespace Azyeb;
 
-public class Klassic
+public class Classic
 {
     public int rangeStart { get; set; }
     public int rangeEnd { get; set; }
     public string identifier { get; set; }
     public RuleGoingType ruleGoingType { get; set; }
+    public string ValueAfterRuleEnd { get; set; }
     
     private int youAt { get; set; }
     public void Init() => youAt = rangeStart;
@@ -26,13 +27,13 @@ public class UnStackableRunner
     {
         var root = groupInstance.ruleGroup;
         StringBuilder stdout = new StringBuilder();
-        List<Klassic> rules = new List<Klassic>();
+        List<Classic> rules = new List<Classic>();
 
         foreach (var rule in root.Rules)
         {
             if (rule.RuleAsString.StartsWith('k'))
             {
-                //Klassic rule
+                //Classic rule
                 //k[range, identifier]
                 //k[0-9, number]
 
@@ -59,7 +60,7 @@ public class UnStackableRunner
                     Error.PrintError(new Error.ErrorInfo()
                     {
                         ErrorLine = rule.RuleAsString,
-                        ErrorDesc = "Klassic range can not longer than one char. (Wrong usage try 'Ayzeb --help')",
+                        ErrorDesc = "Classic range can not longer than one char. (Wrong usage try 'Ayzeb --help')",
                         ErrorIndex = 2,
                         ErrorLen = ranges[0].Length,
                         ErrorLevel = Error.ErrorLevel.Error
@@ -71,7 +72,7 @@ public class UnStackableRunner
                     Error.PrintError(new Error.ErrorInfo()
                     {
                         ErrorLine = rule.RuleAsString,
-                        ErrorDesc = "Klassic range can not longer than one char. (Wrong usage try 'Ayzeb --help')",
+                        ErrorDesc = "Classic range can not longer than one char. (Wrong usage try 'Ayzeb --help')",
                         ErrorIndex = 3 + ranges[0].Length,
                         ErrorLen = ranges[1].Length,
                         ErrorLevel = Error.ErrorLevel.Error
@@ -82,17 +83,19 @@ public class UnStackableRunner
 
                 RuleGoingType ruleGoingType = rangeChars[0] > rangeChars[1] ? RuleGoingType.Down : RuleGoingType.Up;
 
-                rules.Add(new Klassic()
+                rules.Add(new Classic()
                 {
                     rangeStart = rangeChars[0],
                     rangeEnd = rangeChars[1],
                     identifier = values[1],
-                    ruleGoingType = ruleGoingType
+                    ruleGoingType = ruleGoingType,
+                    ValueAfterRuleEnd = rule.ValueAfterRuleEnd
                 });
                 rules.Last().Init();
             }
         }
 
+        List<(string key, string value)> hideEndIdentifiersList = new List<(string key, string value)>();
         for (bool first = true;;)
         {
             if (first) first = false;
@@ -101,7 +104,10 @@ public class UnStackableRunner
                 for (int i = 0; i < rules.Count; i++)
                 {
                     if (!rules[i].Next())
+                    {
+                        if (groupInstance.ruleGroup.HideEndIdentifiers) hideEndIdentifiersList.Add((rules[i].identifier, rules[i].ValueAfterRuleEnd));
                         rules.RemoveAt(i);
+                    }
                 } 
                 if (rules.Count == 0) break;
             }
@@ -109,7 +115,15 @@ public class UnStackableRunner
             string text = root.Text;
             for (int i = 0; i < rules.Count; i++)
             {
-                text = text.Replace("{" + rules[i].identifier.Trim() + "}", rules[i].GetValue().ToString());
+                text = text.Replace($"{{{rules[i].identifier.Trim()}}}", rules[i].GetValue().ToString());
+            }
+
+            if (groupInstance.ruleGroup.HideEndIdentifiers)
+            {
+                foreach (var Identifier in hideEndIdentifiersList)
+                {
+                    text = text.Replace($"{{{Identifier.key.Trim()}}}", Identifier.value);
+                }
             }
 
             stdout.Append(text);
