@@ -27,13 +27,14 @@ string exec = Azyeb.Runner.Run(groupInstance);
 Console.WriteLine(exec);
 ```
 ```
-char is â
-char is ã
-char is ä
-char is å
-char is æ
-char is ç
-char is è
-char is é
-char is ê
+char is â↓
+char is ã↓
+char is ä↓
+char is å↓
+char is æ↓
+char is ç↓
+char is è↓
+char is é↓
+char is ê↓
 ```
+`↓ meaning goes to newline.`
