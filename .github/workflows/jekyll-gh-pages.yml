@@ -36,6 +36,8 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
+      - name: npm install, build and test
+        run: npm run start
 
   # Deployment job
   deploy:
