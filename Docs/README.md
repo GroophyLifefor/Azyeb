@@ -1,41 +1,40 @@
-# Website
+# Azyeb
+Azyeb gives you the result you want, in the way you want, by acting with various rules.
+This project is really valuable to me and I will continue to develop it.
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+# Example of Usage
 
-### Installation
-
+```json
+{
+  "NewRuleGroup": [
+	{
+	  "Text": "char is {chars}\r\n",
+	  "Rules": [
+		{
+		  "RuleAsString": "c[â-ê,chars]"
+		}
+	  ],
+	  "SaveAs": "",
+	  "FixDuplicates": false
+	}
+  ]
+}
 ```
-$ yarn
+```csharp
+var groupInstance = new Azyeb.GroupInstance();
+groupInstance.LoadConfigFromJsonFile("debug.json");
+string exec = Azyeb.Runner.Run(groupInstance);
+Console.WriteLine(exec);
 ```
-
-### Local Development
-
 ```
-$ yarn start
+char is â↓
+char is ã↓
+char is ä↓
+char is å↓
+char is æ↓
+char is ç↓
+char is è↓
+char is é↓
+char is ê↓
 ```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+`↓ meaning goes to newline.`
