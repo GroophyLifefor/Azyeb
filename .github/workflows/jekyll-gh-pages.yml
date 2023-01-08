@@ -46,7 +46,7 @@ jobs:
         with:
           node-version: 12
       - run: npm install
-      - run: npm run start
+      - run: npm start --prefix ./Docs
 
 #    environment:
 #      name: github-pages
