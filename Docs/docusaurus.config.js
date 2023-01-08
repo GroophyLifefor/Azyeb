@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Azyeb',
   tagline: 'Azyeb which gives you the result you want, in the way you want, by acting with various rules.',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://azyeb.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -17,7 +17,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'GroophyLifefor', // Usually your GitHub org/user name.
-  projectName: 'Azyeb', // Usually your repo name.
+  projectName: 'azyeb.github.io', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
