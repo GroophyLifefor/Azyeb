@@ -24,6 +24,7 @@ Like ConfigFile, C# Code, Executable.
 
 For an example of usage 
 
+__config.json__
 ```json
 {
   "Text": "Current number is {number}\r\n",
@@ -34,6 +35,9 @@ For an example of usage
   ]
 }
 ```
+``Azyeb.Console --loadconfig config.json``
+
+or
 
 ``Azyeb.Console --rule "c[0:9, number]" --text "Current number is {number}\r\n"``
 ```diff
@@ -49,3 +53,29 @@ Current number is 8↓
 Current number is 9↓
 ```
 `↓ meaning goes to newline.`
+
+
+## Properties
+
+### Text
+
+The `Text` attribute is the part where you set the output in a way that you can use the variables you define in the rules.
+
+Example usage in Config File
+
+```json
+{
+  "Text": "Current varriable is {VarriableName}\r\n"
+}
+```
+Example usage in C# project
+```csharp
+var groupInstance = new Azyeb.GroupInstance();
+groupInstance.LoadText("Current varriable is {VarriableName}\r\n");
+```
+
+Example usage in Executable (-t or --text)
+
+``Azyeb.Console --text "Current number is {number}\r\n"``
+
+--- 
