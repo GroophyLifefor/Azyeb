@@ -37,10 +37,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
       - name: run
-        uses: ./Docs
         with:
           working-directory: ./Docs
-          build: yarn run build
           start: yarn start
 
   # Deployment job
