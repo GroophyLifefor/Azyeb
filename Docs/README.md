@@ -6,6 +6,7 @@ Although this will be the aim of the program in the beginning and I will not dev
 ## Usages
 
 Have some different usages which gives same result.
+Like ConfigFile, C# Code, Executable.
 
 ### Config File
 
