@@ -2,6 +2,10 @@
 Azyeb gives you the result you want, in the way you want, by acting with various rules.
 This project is really valuable to me and I will continue to develop it.
 
+# Docs
+
+https://groophylifefor.github.io/Azyeb/Docs/
+
 # Example of Usage
 
 ```json
