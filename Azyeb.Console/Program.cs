@@ -77,6 +77,8 @@ namespace Azyeb
             Azyeb.Console.exe --rule "m[-5:9, 1, number, number+1 > 0, number ^ 2]" --rule "c[0:9, i]" --text "number {i} is {number}\r\n"
             */
             
+            Console.WriteLine(groupInstance.GetRulesAsJsonFile());
+            
             string exec = Azyeb.Runner.Run(groupInstance);
             
             Console.WriteLine(exec);

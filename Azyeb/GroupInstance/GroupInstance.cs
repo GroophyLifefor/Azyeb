@@ -48,6 +48,12 @@ public class GroupInstance
                 rules
             );
     }
+    
+    /// <summary>
+    /// Return JSON from this RuleGroup
+    /// </summary>
+    /// <param name="path"></param>
+    public string GetRulesAsJsonFile() => JsonConvert.SerializeObject(ruleGroup, Formatting.Indented);
 
     /// <summary>
     /// Load class from JSON

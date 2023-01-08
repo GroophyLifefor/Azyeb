@@ -1,45 +1,50 @@
 # Azyeb
 
-Azyeb gives you the result you want, in the way you want, by acting with various rules.
-This project is really valuable to me and I will continue to develop it.
+The Azyeb project is an important project in terms of going beyond its general definition, because it is __useless__ in general, as it is a program whose sole purpose is to output in the format you want in accordance with the rules.
+Although this will be the aim of the program in the beginning and I will not deviate from its purpose, it should be known that this project will not stay like this.
 
-# Docs
+## Usages
 
-https://groophylifefor.github.io/Azyeb/Docs/
+Have some different usages which gives same result.
 
-# Example of Usage
+### Config File
+
+```diff
+────Root
+    │   Text
+    │   SaveAs
+    │   FixDuplicates
+    │   HideEndIdentifiers
+    │
+    ├───Rules
+    │       RuleAsString
+    │       ValueAfterRuleEnd
+```
+
+For an example of usage 
 
 ```json
 {
-  "NewRuleGroup": [
-	{
-	  "Text": "char is {chars}\r\n",
-	  "Rules": [
-		{
-		  "RuleAsString": "c[â-ê,chars]"
-		}
-	  ],
-	  "SaveAs": "",
-	  "FixDuplicates": false
-	}
+  "Text": "Current number is {number}\r\n",
+  "Rules": [
+    {
+      "RuleAsString": "c[0:9, number]"
+    }
   ]
 }
 ```
-```csharp
-var groupInstance = new Azyeb.GroupInstance();
-groupInstance.LoadConfigFromJsonFile("debug.json");
-string exec = Azyeb.Runner.Run(groupInstance);
-Console.WriteLine(exec);
-```
-```
-char is â↓
-char is ã↓
-char is ä↓
-char is å↓
-char is æ↓
-char is ç↓
-char is è↓
-char is é↓
-char is ê↓
+
+``Azyeb.Console --rule "c[0:9, number]" --text "Current number is {number}\r\n"``
+```diff
+Current number is 0↓
+Current number is 1↓
+Current number is 2↓
+Current number is 3↓
+Current number is 4↓
+Current number is 5↓
+Current number is 6↓
+Current number is 7↓
+Current number is 8↓
+Current number is 9↓
 ```
 `↓ meaning goes to newline.`
