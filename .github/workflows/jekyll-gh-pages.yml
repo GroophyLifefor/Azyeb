@@ -36,10 +36,6 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
-      - name: run
-        with:
-          working-directory: ./Docs
-          start: yarn start
 
   # Deployment job
   deploy:
