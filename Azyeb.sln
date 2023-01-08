@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azyeb", "Azyeb\Azyeb.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azyeb.Console", "Azyeb.Console\Azyeb.Console.csproj", "{C5A953A2-DAFA-434A-B271-A8FA0A14A6F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitInclude", "Docs\GitInclude.csproj", "{8D1A08D7-A9E3-485D-BD5C-F55566621F0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{C5A953A2-DAFA-434A-B271-A8FA0A14A6F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5A953A2-DAFA-434A-B271-A8FA0A14A6F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5A953A2-DAFA-434A-B271-A8FA0A14A6F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D1A08D7-A9E3-485D-BD5C-F55566621F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D1A08D7-A9E3-485D-BD5C-F55566621F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D1A08D7-A9E3-485D-BD5C-F55566621F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D1A08D7-A9E3-485D-BD5C-F55566621F0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

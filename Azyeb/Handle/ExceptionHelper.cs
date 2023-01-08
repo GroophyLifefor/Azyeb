@@ -21,4 +21,14 @@ internal static class ExceptionHelper
         (!double.TryParse(value, out _))
             ? throw new FormatException("Values lower than two or upper than two. (Wrong usage try 'Ayzeb --help')")
             : false;
+
+    public static bool ThrowIfAnyRuleNotInclude(GroupInstance value) =>
+        (value.ruleGroup.Rules.Count == 0)
+            ? throw new ArgumentException("Any rule not found.")
+            : false;
+    
+    public static bool ThrowIfAnyTextNotInclude(GroupInstance value) =>
+        (string.IsNullOrEmpty(value.ruleGroup.Text))
+            ? throw new ArgumentException("Any rule not found.")
+            : false;
 }
