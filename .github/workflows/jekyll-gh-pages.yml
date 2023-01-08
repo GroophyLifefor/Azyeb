@@ -36,10 +36,6 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
-      - name: run server
-        uses: CultureHQ/actions-yarn@master
-        with:
-          args: start
 
   # Deployment job
   deploy:
