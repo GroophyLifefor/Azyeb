@@ -99,4 +99,51 @@ public class RuleParser
 
         return classicRules;
     }
+
+    public static List<Stack> ParseStacks(List<Parsing.Rule> Rules, List<Classic> classics, List<Math> maths)
+    {
+        List<Stack> stackRules = new List<Stack>();
+        foreach (var rule in Rules)
+        {
+            if (rule.RuleAsString.StartsWith('s'))
+            {
+                // c[0-9, nf]
+                // c[9-0, ns]
+                
+                // s[nf, ns] // run both at same time
+                // s[ns]     // just run ns
+                // s[nf]     // just run nf
+                
+                var values = rule.RuleAsString
+                    .TrimStart('s') // Remove type declarer
+                    .TrimStart('[').TrimEnd(']') // Remove square brackets
+                    .Split(',') // Split by ','
+                    .Select(x => x.Trim()).ToArray();
+                
+                ExceptionHelper.ThrowIfNotHaveValue(values);
+
+                Stack stack = new Stack();
+                if (values[0] == "mix")
+                {
+                    stack.isMix = true;
+                }
+                for (int i = (stack.isMix ? 1 : 0); i < values.Length; i++)
+                {
+                    bool isClassic = classics.Any(x => x.identifier.Equals(values[i]));
+                    bool isMath = maths.Any(x => x.identifier.Equals(values[i]));
+
+                    ExceptionHelper.ThrowIfNotHaveIdentifier(!isClassic && !isMath, values[i]);
+                    
+                    classics.Where(x => x.identifier.Equals(values[i])).ToList().ForEach(
+                        item => stack.addStackRule(item));
+                    
+                    maths.Where(x => x.identifier.Equals(values[i])).ToList().ForEach(
+                        item => stack.addStackRule(item));
+                }
+                stackRules.Add(stack);
+            }
+        }
+
+        return stackRules;
+    }
 }

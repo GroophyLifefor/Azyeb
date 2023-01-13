@@ -11,16 +11,20 @@ namespace Azyeb
     {
         static void Main(string[] args)
         {
-            
+            /*
             args = new[]
             {
                 "--rule",
-                    "m[-5:9, 1, number, number+1 > 0, number ^ 2]",
+                    "m[-5:5, 1, number, true, number ^ 2]",
                 "--rule",
-                    "c[0:9, i]",
+                    "m[5:-5, 1, numbers, true, numbers * 2]",
+                "--rule",
+                    "s[mix, number, numbers]",
+                "--fixduplicate",
                 "--text",
-                    "number {i} is {number}\r\n"
+                    "number is {number} and {numbers}\r\n"
             };
+            */
             
             var groupInstance = new Azyeb.GroupInstance();
             
@@ -49,7 +53,7 @@ namespace Azyeb
             {
                 groupInstance.ruleGroup.HideEndIdentifiers = true;
             });
-            parsing.AddArgument("fixdup","fixduplicates", value =>
+            parsing.AddArgument("fixduplicate","fixduplicates", value =>
             {
                 groupInstance.ruleGroup.FixDuplicates = true;
             });

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using Azyeb.Parse;
 using Azyeb.Rules;
 using Math = Azyeb.Rules.Math;
@@ -13,12 +14,26 @@ public class UnStackableRunner
         
         List<Classic> classicRules = RuleParser.ParseClassics(groupInstance.ruleGroup.Rules);
         List<Math> mathRules = RuleParser.ParseMaths(groupInstance.ruleGroup.Rules);
-        ExecuteRules(classicRules, mathRules, groupInstance, ref stdout);
+        List<string> hashes = new List<string>();
+        List<string> resultList = ExecuteRules(classicRules, mathRules, groupInstance);
+        for (int i = 0; i < resultList.Count; i++)
+        {
+            if (groupInstance.ruleGroup.FixDuplicates)
+            {
+                if (!hashes.Any(x => HashString(resultList[i]) == x))
+                {
+                    stdout.Append(resultList[i]);
+                    hashes.Add(HashString(resultList[i]));
+                }
+            }
+            else stdout.Append(resultList[i]);
+        }
         return stdout.ToString();
     }
-
-    public static void ExecuteRules(List<Classic> rules, List<Math> maths, GroupInstance groupInstance, ref StringBuilder stdout)
+    
+    public static List<string> ExecuteRules(List<Classic> rules, List<Math> maths, GroupInstance groupInstance)
     {
+        List<string> resultList = new List<string>();
         List<(string key, string value)> hideEndIdentifiersList = new List<(string key, string value)>();
         for (bool first = true;;)
         {
@@ -65,7 +80,32 @@ public class UnStackableRunner
                 }
             }
 
-            stdout.Append(text);
+            resultList.Add(text);
+        }
+
+        return resultList;
+    }
+    
+    static string HashString(string text, string salt = "")
+    {
+        if (String.IsNullOrEmpty(text))
+        {
+            return String.Empty;
+        }
+    
+        // Uses SHA256 to create the hash
+        using (var sha = new System.Security.Cryptography.SHA256Managed())
+        {
+            // Convert the string to a byte array first, to be processed
+            byte[] textBytes = System.Text.Encoding.UTF8.GetBytes(text + salt);
+            byte[] hashBytes = sha.ComputeHash(textBytes);
+        
+            // Convert back to a string, removing the '-' that BitConverter adds
+            string hash = BitConverter
+                .ToString(hashBytes)
+                .Replace("-", String.Empty);
+
+            return hash;
         }
     }
 }
